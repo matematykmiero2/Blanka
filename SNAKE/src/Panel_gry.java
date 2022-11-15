@@ -11,16 +11,14 @@ public class Panel_gry extends JPanel implements ActionListener{
     static final int rkratek = 25;
     static final int ikratek = (szerokosc*wysokosc)/(rkratek*rkratek);
     static final int czas = 75;
-    final int x[] = new int[ikratek];
-    final int y[] = new int[ikratek];
+    final int[] x = new int[ikratek];
+    final int[] y = new int[ikratek];
     int waz = 6;
     int zjedzone;
     int jedzenieX;
     int jedzenieY;
-    int punkty;
     char kierunek = 'R';
     boolean trwa_gra=false;
-    static boolean r = true;
     Timer zegar;
     Random los;
 
@@ -58,10 +56,22 @@ public class Panel_gry extends JPanel implements ActionListener{
 
             for (int i = 0; i < waz; i++) {
                 if (i == 0) {
-                    g.setColor(new Color(10, 130, 100));
+                    if(zjedzone>=30){
+                        g.setColor(new Color(los.nextInt(255), los.nextInt(255), los.nextInt(255)));
+                    }
+                    else{
+                        g.setColor(new Color(10, 130, 100));
+                    }
+
                     g.fillRect(x[i], y[i], rkratek, rkratek);
                 } else {
-                    g.setColor(new Color(45, 180, 0));
+                    if(zjedzone>=30){
+                        g.setColor(new Color(los.nextInt(255), los.nextInt(255), los.nextInt(255)));
+                    }
+                    else{
+                        g.setColor(new Color(45, 180, 0));
+                    }
+
                     g.fillRect(x[i], y[i], rkratek, rkratek);
                 }
             }
@@ -80,7 +90,7 @@ public class Panel_gry extends JPanel implements ActionListener{
     }
     public void noweJedznie(){
         jedzenieX=los.nextInt((szerokosc/rkratek))*rkratek;
-        jedzenieY=+los.nextInt((wysokosc/rkratek))*rkratek;;
+        jedzenieY=los.nextInt((wysokosc/rkratek))*rkratek;
     }
 
     public void ruch(){
@@ -88,20 +98,11 @@ public class Panel_gry extends JPanel implements ActionListener{
             x[i]=x[i-1];
             y[i]=y[i-1];
         }
-        switch(kierunek){
-            case 'U':
-                y[0]=y[0]-rkratek;
-                break;
-
-            case 'D':
-                y[0]=y[0]+rkratek;
-                break;
-            case 'L':
-                x[0]=x[0]-rkratek;
-                break;
-            case 'R':
-                x[0]=x[0]+rkratek;
-                break;
+        switch (kierunek) {
+            case 'U' -> y[0] = y[0] - rkratek;
+            case 'D' -> y[0] = y[0] + rkratek;
+            case 'L' -> x[0] = x[0] - rkratek;
+            case 'R' -> x[0] = x[0] + rkratek;
         }
     }
     public void czy_jedzenie(){
@@ -144,7 +145,7 @@ public class Panel_gry extends JPanel implements ActionListener{
         g.setFont(new Font("Ink Free",Font.BOLD,30));
         FontMetrics metrics = getFontMetrics(g.getFont());
         g.drawString("BLANKA, TRENUJ DALEJ (Nacisnij R)",(szerokosc - metrics.stringWidth("BLANKA, TRENUJ DALEJ (Nacisnij R)"))/2,wysokosc/2);
-        JButton restart =new JButton();
+
 
     }
 

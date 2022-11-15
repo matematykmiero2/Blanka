@@ -1,8 +1,6 @@
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import java.util.Random;
 import java.lang.*;
 public class Snake extends JPanel {
     JButton start;
@@ -15,13 +13,10 @@ public class Snake extends JPanel {
         start.setFont(new Font("Ink Free",Font.BOLD,30));
 
         start.setPreferredSize(new Dimension(100,100));
-        start.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        start.addActionListener(e -> {
 
-                if(e.getSource()==start){
-                    new Frame();
-                }
+            if(e.getSource()==start){
+                new Frame();
             }
         });
         s.setPreferredSize(new Dimension(800,800));
